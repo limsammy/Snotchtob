@@ -10,6 +10,7 @@ class PlaylistGrabber
 
   def grab_playlist(id)
     playlist = Yt::PlaylistItem.new(id: 'PLjW_GNR5Ir0GWEP_ove')
-    playlist
+    binding.pry
+    playlist.playlist_items
   end
 end
