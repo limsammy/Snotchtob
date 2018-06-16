@@ -1,5 +1,6 @@
+require 'dotenv'
+Dotenv.load
 require 'yt'
-require 'dotenv-rails'
 require 'pry'
 
 class PlaylistGrabber
