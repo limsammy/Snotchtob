@@ -2,6 +2,7 @@ require 'dotenv'
 Dotenv.load
 require 'yt'
 require 'pry'
+require 'youtube-dl'
 
 class PlaylistGrabber
   def initialize
