@@ -2,12 +2,13 @@ require 'yt'
 require 'dotenv'
 
 class PlaylistGrabber
-  def setup
-    Yt.configuration.api_key = ENV['api_key']
+  def initialize
+    Yt.configure do |config|
+      config.api_key = ENV['api_key']
+    end
   end
 
-  def self.grab_playlist(id)
-    setup
+  def grab_playlist(id)
     playlist = Yt::PlaylistItem.new(id: 'PLjW_GNR5Ir0GWEP_ove')
     playlist
   end
