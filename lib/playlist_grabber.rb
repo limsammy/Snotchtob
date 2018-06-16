@@ -10,8 +10,10 @@ class PlaylistGrabber
 
   def grab_playlist(id)
     Yt.configuration.api_key = ENV['YT_KEY']
-    playlist = Yt::PlaylistItem.new(id: 'PLjW_GNR5Ir0GWEP_ove')
-    binding.pry
-    playlist.playlist_items
+    playlist = Yt::Playlist.new(id: id)
+    # binding.pry
+    playlist.playlist_items.map do |video|
+      video.video_id
+    end
   end
 end
