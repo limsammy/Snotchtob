@@ -116,13 +116,19 @@ def create_directory():
   if not os.path.exists('./videos'):
     os.makedirs('./videos')
 
-if __name__ == '__main__':
-  # When running locally, disable OAuthlib's HTTPs verification. When
-  # running in production *do not* leave this option enabled.
-  os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+def run():
   client = get_authenticated_service()
+
+  playlist_id = raw_input("Enter a playlist ID: ")
   
   playlist_items_list_by_playlist_id(client,
     part='snippet,contentDetails',
     maxResults=25,
-    playlistId='PLcKFH-qaX7yigdFDf6WplLkFaMLSp9jeH')
+    playlistId=playlist_id)
+
+if __name__ == '__main__':
+  # When running locally, disable OAuthlib's HTTPs verification. When
+  # running in production *do not* leave this option enabled.
+  os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+  run()
+  
