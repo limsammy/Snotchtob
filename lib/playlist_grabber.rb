@@ -27,7 +27,7 @@ class PlaylistGrabber
   def save_playlist(playlist_id)
     playlist = grab_playlist(playlist_id)
     playlist.each do |video|
-      get_json("/mp4/#{video[:id]}/" + DateTime.now.to_time.to_i.to_s)
+      download_page = get_json("/mp4/#{video[:id]}/" + DateTime.now.to_time.to_i.to_s)
       binding.pry
     end
   end
