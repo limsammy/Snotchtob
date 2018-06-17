@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-CLIENT_SECRETS_FILE = "client_secret.json"
+CLIENT_SECRETS_FILE = "client_secrets.json"
 
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
 API_SERVICE_NAME = 'youtube'
@@ -25,6 +25,7 @@ def print_response(response):
 
 def build_resource(properties):
   resource = {}
+  import code; code.interact(local=dict(globals(), **locals()))
   for p in properties:
     # Given a key like "snippet.title", split into "snippet" and "title", where
     # "snippet" will be an object and "title" will be a property in that object.
