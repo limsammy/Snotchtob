@@ -98,7 +98,9 @@ def sanitize_data(playlist):
 
     resource['id'] = id
     resource['title'] = title
-    embed()
+
+    videos.append(resource)
+  embed()
 
 if __name__ == '__main__':
   # When running locally, disable OAuthlib's HTTPs verification. When
