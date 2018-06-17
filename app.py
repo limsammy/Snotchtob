@@ -109,8 +109,12 @@ def sanitize_data(playlist):
 def download_videos(videos_list):
   for video in videos_list:
     link = "http://youtube.com/watch?v={}".format(video['id'])
-    YouTube(link).streams.first().download('./videos')
-    print("Downloaded {}").format(video['title'])
+    try:
+      YouTube(link).streams.first().download('./videos')
+      print("Downloaded {}").format(video['title'])
+    except Exception as e:
+      print("Error downloading {}").format(video['title'])
+      print("Error: " + str(e))
 
 def create_directory():
   if not os.path.exists('./videos'):
