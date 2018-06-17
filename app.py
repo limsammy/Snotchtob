@@ -114,7 +114,7 @@ def download_videos(videos_list):
       print("Downloaded {}").format(video['title'])
     except Exception as e:
       print("Error downloading {}").format(video['title'])
-      print("Error: " + str(e))
+      print("Error: " + str(e) + ", possibly removed")
 
 def create_directory():
   if not os.path.exists('./videos'):
