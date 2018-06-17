@@ -1,24 +1,30 @@
-from pytube import YouTube
 
 import os
-
 import google.oauth2.credentials
-
 import google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+import json
+from IPython import embed
+from pytube import YouTube
+import unicodedata
+
 CLIENT_SECRETS_FILE = "client_secrets.json"
+DEVELOPER_KEY = "AIzaSyCZDE98UD5cUa15DJquhW5Jc9bxusijWcc"
 
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 
 def get_authenticated_service():
-  flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-  credentials = flow.run_console()
-  return build(API_SERVICE_NAME, API_VERSION, credentials = credentials)
+  # flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
+  # credentials = flow.run_console()
+  # return build(API_SERVICE_NAME, API_VERSION, credentials = credentials)
+  return build(API_SERVICE_NAME, API_VERSION,
+    developerKey=DEVELOPER_KEY)
+
 
 def print_response(response):
   print(response)
@@ -77,9 +83,22 @@ def playlist_items_list_by_playlist_id(client, **kwargs):
   response = client.playlistItems().list(
     **kwargs
   ).execute()
+  response = json.dumps(response)
+  json_response = json.loads(response)
+  sanitize_data(json_response['items'])
 
   return print_response(response)
 
+def sanitize_data(playlist):
+  videos = []
+  for video in playlist:
+    resource = {}
+    id = unicodedata.normalize('NFKD', video['snippet']['resourceId']['videoId']).encode('ascii','ignore')
+    title = unicodedata.normalize('NFKD', video['snippet']['title']).encode('ascii','ignore')
+
+    resource['id'] = id
+    resource['title'] = title
+    embed()
 
 if __name__ == '__main__':
   # When running locally, disable OAuthlib's HTTPs verification. When
