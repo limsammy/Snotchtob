@@ -85,9 +85,13 @@ def playlist_items_list_by_playlist_id(client, **kwargs):
   ).execute()
   response = json.dumps(response)
   json_response = json.loads(response)
-  sanitize_data(json_response['items'])
+  
+  data = sanitize_data(json_response['items'])
 
-  return print_response(response)
+  create_directory()
+
+  download_videos(data)
+  # return print_response(response)
 
 def sanitize_data(playlist):
   videos = []
@@ -100,7 +104,17 @@ def sanitize_data(playlist):
     resource['title'] = title
 
     videos.append(resource)
-  embed()
+  return videos
+
+def download_videos(videos_list):
+  for video in videos_list:
+    link = "http://youtube.com/watch?v={}".format(video['id'])
+    YouTube(link).streams.first().download('./videos')
+    print("Downloaded {}").format(video['title'])
+
+def create_directory():
+  if not os.path.exists('./videos'):
+    os.makedirs('./videos')
 
 if __name__ == '__main__':
   # When running locally, disable OAuthlib's HTTPs verification. When
