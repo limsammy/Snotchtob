@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/n1ckbren/youtube-dl.rb
+  revision: 1217ace2b38df971eeae9cb93feffa83865ea255
+  specs:
+    youtube-dl.rb (0.3.1.2017.06.25)
+      cocaine (>= 0.5.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -24,8 +31,6 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    youtube-dl.rb (0.3.1.2016.09.11.1)
-      cocaine (>= 0.5.4)
     yt (0.28.5)
       activesupport
 
@@ -36,7 +41,7 @@ DEPENDENCIES
   dotenv
   minitest
   pry
-  youtube-dl.rb
+  youtube-dl.rb!
   yt (~> 0.28.0)
 
 BUNDLED WITH
